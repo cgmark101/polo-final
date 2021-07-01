@@ -1,9 +1,10 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .forms import Nuevousuario
 from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm 
 from ecommerce.models import *
+from ecommerce.models import Productos
 
 def home(request):
     titulo = "Inicio"
@@ -20,10 +21,18 @@ def home(request):
 			}
 		)
 
-def products(request):
-    cat = Categorias.objects.all()
+def all_products(request):
     articulo = Productos.objects.all()
     return render(request, 'productos.html', {'articulo':articulo})
+
+def product_detail(request):
+  return render(request, 'detalles.html', {
+    'productos': get_object_or_404(Productos, pk=id)
+  })
+
+def category(request):
+    cat = Categorias.objects.all()
+    return render(request, 'categorias.html', {'cat':cat})
 
 def register_request(request):	
 	if request.method == "POST":
