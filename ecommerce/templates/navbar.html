@@ -1,0 +1,23 @@
+{% load static %}
+<!--Navbar1-->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="brand" href="{% url 'home' %}"><img src="{% static 'img/logo.jpg' %}" alt="JAGUARETE KAA S.A."></a>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
+        <!--Normal user-->
+        {% if user.is_authenticated and not request.user.is_staff%}
+          {% include "normal_user.html" %}
+        {% endif %}
+        <!--Staff user-->
+        {% if user.is_authenticated and request.user.is_staff %}
+          {% include "staff_user.html" %}
+        {% endif %}
+        <!--Not user-->
+        {% if not user.is_authenticated and not request.user.is_staff%}
+          {% include "not_user.html" %}
+        {% endif %}
+      </ul>
+    </div>
+  </nav>
+  <!--End Navbar1-->

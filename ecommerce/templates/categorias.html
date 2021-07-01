@@ -1,0 +1,9 @@
+<li class="nav-item dropdown">
+  <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Categorias</a>
+  <ul class="dropdown-menu">
+    {% for i in cat %}
+    <li><a class="dropdown-item" href="#">{{ i }}</a></li>
+    {% endfor %}
+    
+  </ul>
+</li>

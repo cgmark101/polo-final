@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    {% load static %}
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block titulo %} JAGUARETE - {{ titulo }} {% endblock %}</title>
+    <!--Bootstrap CSS-->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+    <!--Favicon -->
+    <link rel="shortcut icon" type="image/png" href="{% static 'img/fav.jpg' %}"/>
+  </head>
+  <body>
+
+    {% include "navbar.html" %}
+
+    {% block nav %} {% endblock%}
+
+    {% block acerca %} {% endblock%}
+    {% block contacto %} {% endblock%}
+
+  {% block content %} {% endblock%}
+  {% include "footer.html" %}
+  <!-- Optional Javascript -->
+  <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+</body>
+</html>
