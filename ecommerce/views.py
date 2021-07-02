@@ -1,4 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
+from cart.cart import Cart
+from .forms import ArticuloForm
+from django.contrib import messages
 from .models import Categorias, Productos
 
 def acerca(request):
@@ -15,16 +19,6 @@ def home(request):
 	last_articulo = Productos.objects.all().order_by('-id')[:3]
 	restantes_articulos = Productos.objects.all().order_by('-id')[3:10]
 
-	# contador = 0
-	# data = []
-	# for i in reversed(articulo):
-	# 	print(i)
-	# 	data.append(i)
-	# 	if contador == 2:
-	# 		break
-	# 	contador = contador + 1
-	# print(data)
-	#print(cat)
 	return render (
 		request=request, 
 		template_name='home.html', 
@@ -41,8 +35,9 @@ def all_products(request, producto_id):
     return render(request, 'productos.html', {'articulo':articulo})
 
 def detail_products(request, producto_id):
-    detalle=Productos.objects.get(id=producto_id)
-    return render(request, 'productos.html', {'producto':  detalle})
+	cat = Categorias.objects.all()
+	detalle=Productos.objects.get(id=producto_id)
+	return render(request, 'productos.html', {'producto':  detalle, 'cat':cat})
 
 def category(request):
 	cat = Categorias.objects.all()
@@ -50,32 +45,41 @@ def category(request):
 
 def detail_category(request, cat):
 	detalle = Categorias.objects.all()
-	# data_cat = []
-	# data_filter = []
-	# for i in detalle:
-	# 	data_cat.append(i.categoria)
-	# print(data_cat)
-	articulos = Productos.objects.filter(categoria__categoria__contains=cat)
-	# for i in articulos:
-	# 	data_filter.append(i)
-	# if data_filter in data_cat:
-	# 	pass
-	# print(data_filter)
-	
+	cat1 = Categorias.objects.all()
+	articulos = Productos.objects.filter(categoria__categoria__contains=cat)	
 
-	return render(request, 'categoria.html', {'cat_detalle':detalle, 'articulos':articulos})
+	return render(request, 'categoria.html', {'cat_detalle':detalle, 'articulos':articulos, 'cat':cat1, })
 
 def search(request):
 	titulo = "Busqueda"
 	cat = Categorias.objects.all()
 	searched = request.POST['searched']
 	busqueda = Productos.objects.filter(titulo__contains=searched)
-	no_encontrado = f'Articulo {searched} no encontrado'
+
 	if not busqueda:
-		return render (request=request, template_name="search.html", context={"titulo":titulo, 'no_encontrado':no_encontrado})
+		print('not')
+		return render (request=request, template_name="search.html", context={"titulo":titulo, 'no_encontrado':f'Articulo {searched} no encontrado', 'cat':cat})
+		
 	else:
 		if request.method == 'POST':
-			return render (request=request, template_name="search.html", context={"titulo":titulo, "searched":searched, "busqueda":busqueda})
+			print('post')
+			return render (request=request, template_name="search.html", context={"titulo":titulo, "searched":searched, "busqueda":busqueda, 'cat':cat})
 		if request.method == 'GET':
-			return render (request=request, template_name="search.html")
-		
+			print('ok')
+			return render (request=request, template_name="search.html", context={"titulo":titulo, 'cat':cat})
+			
+@login_required		
+def add_article(request, *args, **kwargs):	
+	if request.method == 'POST':
+		form = ArticuloForm(request.POST, request.FILES)
+		if form.is_valid():
+			form.save()
+			messages.success(request, 'Articulo agregado' )
+			return redirect('home')
+		messages.error(request, 'Error')
+	formulario = ArticuloForm
+	titulo = 'Agregar'
+	return render (
+		request=request, 
+		template_name='crear-articulo.html', 
+		context={'agregar':formulario, 'titulo':titulo})

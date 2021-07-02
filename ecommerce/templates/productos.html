@@ -2,11 +2,12 @@
 {% block nav %}
 	{% include "nav.html" %}
 	<div class="row">
-		<div class="col-sm-4">
+		<div class="col-sm-6">
 			<div class="card">
 				<div class="card-body">
 					<h5 class="card-title">{{ producto.titulo }}</h5>
 					<p class="card-text">{{ producto.descripcion }}</p>
+					<img src="{{ producto.imagen.url }}" alt="{{ producto.titulo }}">
 					<p class="card-text">{{ producto.precio }} $</p>
 					<a href="{% url 'producto' producto.id %}" class="btn btn-primary">Agregar al Carrito</a>
 				</div>

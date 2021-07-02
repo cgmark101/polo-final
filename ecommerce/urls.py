@@ -13,7 +13,8 @@ urlpatterns = [
     path('producto/<int:producto_id>/', views.detail_products, name="producto"),
     path('categorias/all/', views.category, name="categorias"),
     path('categoria/<str:cat>/', views.detail_category, name="categoria"),
-    path('busqueda', views.search, name="search")
+    path('busqueda/', views.search, name="search"),
+    path('crear/', views.add_article, name="crear"),
 ]
 
 if settings.DEBUG:
