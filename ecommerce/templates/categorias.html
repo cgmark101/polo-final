@@ -2,8 +2,7 @@
   <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Categorias</a>
   <ul class="dropdown-menu">
     {% for i in cat %}
-    <li><a class="dropdown-item" href="#">{{ i }}</a></li>
+    <li><a class="dropdown-item" href="{% url 'categoria' i.categoria|lower %}" >{{ i }}</a></li>
     {% endfor %}
-    
   </ul>
 </li>

@@ -13,7 +13,7 @@ class Categorias(models.Model):
 
 class Productos(models.Model):
     titulo = models.CharField(max_length=30)
-    imagen = models.ImageField(max_length=100)
+    imagen = models.ImageField(upload_to='static/img/photos', max_length=100)
     descripcion = models.TextField()
     precio = models.DecimalField(default=0.00, max_digits=10, decimal_places=2)
     categoria = models.ForeignKey(Categorias, on_delete=models.CASCADE)

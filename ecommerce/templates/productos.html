@@ -2,18 +2,17 @@
 {% block nav %}
 	{% include "nav.html" %}
 	<div class="row">
-		{% for i in articulo %}
-			<div class="col-sm-4">
-				<div class="card">
-					<div class="card-body">
-						<h5 class="card-title">{{ i.titulo }}</h5>
-						<p class="card-text">{{ i.descripcion }}</p>
-						<p class="card-text">{{ i.precio }} $</p>
-						<a href="#" class="btn btn-primary">Ver</a>
-						<a href="#" class="btn btn-primary">Agregar al carrito</a>
-					</div>
+		<div class="col-sm-4">
+			<div class="card">
+				<div class="card-body">
+					<h5 class="card-title">{{ producto.titulo }}</h5>
+					<p class="card-text">{{ producto.descripcion }}</p>
+					<p class="card-text">{{ producto.precio }} $</p>
+					<a href="{% url 'producto' producto.id %}" class="btn btn-primary">Agregar al Carrito</a>
 				</div>
 			</div>
-		{% endfor %}
+			
+		</div>
+
 	</div>
 {% endblock %}

@@ -1,59 +1,36 @@
 {% extends "base.html" %}
+{% load static %}
 {% block nav %}
 	{% include "nav.html" %}
 	<div class="row">
-		{% for i in articulo %}
+		{% for i in data %}
 		<div class="col-sm-4">
 			<div class="card">
 				<div class="card-body">
-					
-					<h5 class="card-title">{{ i.titulo }}</h5>
-
+					<h5 class="card-title"><a href="{% url 'producto' i.id %}">{{ i.titulo }}</a></h5>
 					<p class="card-text">{{ i.descripcion }}</p>
-					<p class="card-text">{{ i.precio }} $</p>
-					<a href="#" class="btn btn-primary">Go somewhere</a>
+					<img src="{{ i.imagen.url }}" alt="JAGUARETE KAA S.A.">
+					<p class="card-text">{{ i.precio }} $</p>  
+					<a href="{% url 'producto' i.id %}" class="btn btn-primary">Agregar Al Carrito</a>
 				</div>
 			</div>
 			
 		</div>
-		{% endfor %}
-		<div class="col-sm-4">
-			<div class="card">
-				<div class="card-body">
-					<h5 class="card-title">Producto 3</h5>
-					<p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-					<a href="#" class="btn btn-primary">Go somewhere</a>
-				</div>
-			</div>
-		</div>
-		<div class="col-sm-4">
-			<div class="card">
-				<div class="card-body">
-					<h5 class="card-title">Producto 3</h5>
-					<p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-					<a href="#" class="btn btn-primary">Go somewhere</a>
-				</div>
-			</div>
-		</div>
+		{% endfor %};
 	</div>
 	<div class="row">
+		{% for i in data2 %}
 		<div class="col-sm-12">
 			<div class="card">
 				<div class="card-body">
-					<h5 class="card-title">Special title treatment</h5>
-					<p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-					<a href="#" class="btn btn-primary">Go somewhere</a>
+					<h5 class="card-title"><a href="{% url 'producto' i.id %}">{{ i.titulo }}</a></h5>
+					<p class="card-text">{{ i.descripcion }}</p>
+					<img src="{{ i.imagen.url }}" alt="JAGUARETE KAA S.A.">
+					<p class="card-text">{{ i.precio }} $</p>  
+					<a href="{% url 'producto' i.id %}" class="btn btn-primary">Agregar Al Carrito</a>
 				</div>
 			</div>
 		</div>
-		<div class="col-sm-12">
-			<div class="card">
-				<div class="card-body">
-					<h5 class="card-title">Special title treatment</h5>
-					<p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-					<a href="#" class="btn btn-primary">Go somewhere</a>
-				</div>
-			</div>
-		</div>
-	</div>
+		{% endfor %};
+
 {% endblock%}
