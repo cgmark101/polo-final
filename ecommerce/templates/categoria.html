@@ -9,7 +9,7 @@
             <div class="card-body">
                 <h5 class="card-title"><a href="{% url 'producto' i.id %}">{{ i.titulo }}</a></h5>
                 <p class="card-text">{{ i.descripcion }}</p>
-                <img src="{{ i.imagen.url }}" alt="JAGUARETE KAA S.A.">
+                <img src="{{ i.imagen.url }}" alt="{{ i.titulo }}">
                 <p class="card-text">{{ i.precio }} $</p>  
                 <a href="{% url 'producto' i.id %}" class="btn btn-primary">Agregar Al Carrito</a>
             </div>
