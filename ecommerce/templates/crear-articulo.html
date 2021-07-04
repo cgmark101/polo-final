@@ -1,20 +1,24 @@
-<!DOCTYPE html> 
-<html lang="en"> 
-<head> 
-    <meta charset="UTF-8"> 
-    <title>image upload example</title> 
-</head> 
-<body> 
+{% extends "base.html" %}
+
+{% block titulo %} {{ titulo }} {% endblock %}
+
+{% block content %}      
+
+{% load crispy_forms_tags %}
     {% load crispy_forms_tags %} 
     {% if user.is_authenticated and request.user.is_staff %}  
-    <form method = "post" enctype="multipart/form-data"> 
-        {% csrf_token %} 
-        {{ agregar|crispy }} 
-        <button type="submit">Upload</button> 
+
+        <div class="container py-5">
+            <h1>Crear</h1>
+            <form method="post" enctype="multipart/form-data"> 
+              {% csrf_token %}
+              {{ agregar|crispy }}
+              <button class="btn btn-primary" type="submit">Upload</button> 
+            </form>
+          </div>
+
+          
     {% else %}
     <p>Fuera de aqui</p>
     {% endif %}
-
-    </form> 
-</body> 
-</html> 
+    {% endblock %}

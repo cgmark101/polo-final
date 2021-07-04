@@ -1,0 +1,25 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Pagina no Encontrada</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}" />
+    <link href="{% static 'img/fav.jpg' %}" rel="shortcut icon" type="image/x-icon" />
+</head>
+
+<body>
+    <div class="container">
+        <img class="ops" src="{% static 'img/404.svg' %}" />
+        <br />
+        <h3>Error<br /> No hay nada que ver por aqui.</h3>
+        <br />
+        <a class="buton" href="{% url 'home' %}">Home</a>
+    </div>
+</body>
+
+</html>
